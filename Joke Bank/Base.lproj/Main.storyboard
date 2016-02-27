@@ -1,13 +1,30 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6211" systemVersion="14A298i" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="26n-fW-V6x">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6204"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
     </dependencies>
     <scenes>
+        <!--Navigation Controller-->
+        <scene sceneID="GbJ-DS-oxa">
+            <objects>
+                <navigationController id="26n-fW-V6x" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="hQ8-dl-fBm">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="b3K-GG-q00"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ncv-cJ-9GX" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-456" y="322"/>
+        </scene>
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Joke_Bank" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -15,11 +32,99 @@
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="RhC-hJ-g47">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </tableView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="RhC-hJ-g47" secondAttribute="bottom" id="UBK-QR-PsF"/>
+                            <constraint firstAttribute="trailing" secondItem="RhC-hJ-g47" secondAttribute="trailing" id="eJ7-VE-ofq"/>
+                            <constraint firstItem="RhC-hJ-g47" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="ldg-zD-web"/>
+                            <constraint firstItem="RhC-hJ-g47" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="-64" id="tWa-bk-dhz"/>
+                        </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="xOB-Y5-wuJ"/>
+                    <connections>
+                        <outlet property="tableView" destination="RhC-hJ-g47" id="38Z-SC-vSB"/>
+                        <segue destination="aoK-0M-bg9" kind="show" identifier="CollectionToJokeSegue" id="6nQ-p6-X6J"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="225" y="322"/>
+        </scene>
+        <!--Jokes View Controller-->
+        <scene sceneID="4IG-VT-S3B">
+            <objects>
+                <viewController id="aoK-0M-bg9" customClass="JokesViewController" customModule="Joke_Bank" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="eTo-dg-DmZ"/>
+                        <viewControllerLayoutGuide type="bottom" id="cnC-8e-qYO"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="u5r-eI-qg4">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="bKe-9u-uAE">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="bKe-9u-uAE" secondAttribute="trailing" id="8tV-Q9-PSf"/>
+                            <constraint firstItem="bKe-9u-uAE" firstAttribute="leading" secondItem="u5r-eI-qg4" secondAttribute="leading" id="G74-UJ-nJP"/>
+                            <constraint firstItem="cnC-8e-qYO" firstAttribute="top" secondItem="bKe-9u-uAE" secondAttribute="bottom" id="GC9-RR-mD2"/>
+                            <constraint firstItem="bKe-9u-uAE" firstAttribute="top" secondItem="eTo-dg-DmZ" secondAttribute="bottom" constant="-64" id="QRQ-3D-YWk"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="tableView" destination="bKe-9u-uAE" id="GXq-Bg-Vkn"/>
+                        <segue destination="wOV-gN-btg" kind="show" identifier="JokeToTextSegue" id="N3e-5M-HZ8"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="xe8-d7-tOE" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="908" y="322"/>
+        </scene>
+        <!--Joke Text View Controller-->
+        <scene sceneID="OdZ-MC-iav">
+            <objects>
+                <viewController id="wOV-gN-btg" customClass="JokeTextViewController" customModule="Joke_Bank" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="W6r-FS-08y"/>
+                        <viewControllerLayoutGuide type="bottom" id="SJP-jj-ITq"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="RYj-YK-5F3">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="1Oe-dO-Sjw">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="1Oe-dO-Sjw" firstAttribute="leading" secondItem="RYj-YK-5F3" secondAttribute="leading" id="BMb-zJ-2Ea"/>
+                            <constraint firstItem="1Oe-dO-Sjw" firstAttribute="top" secondItem="W6r-FS-08y" secondAttribute="bottom" constant="-64" id="EyT-KD-AKG"/>
+                            <constraint firstItem="SJP-jj-ITq" firstAttribute="top" secondItem="1Oe-dO-Sjw" secondAttribute="bottom" id="j5M-He-LzG"/>
+                            <constraint firstAttribute="trailing" secondItem="1Oe-dO-Sjw" secondAttribute="trailing" id="xkD-b8-keS"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="textView" destination="1Oe-dO-Sjw" id="mya-qq-vuX"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="zAp-z0-CvV" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1591" y="322"/>
         </scene>
     </scenes>
 </document>

@@ -17,6 +17,8 @@
 		7A4C22121C802B1000CB1AE7 /* Collection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A4C220E1C802B1000CB1AE7 /* Collection.swift */; };
 		7A4C22131C802B1000CB1AE7 /* Joke+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A4C220F1C802B1000CB1AE7 /* Joke+CoreDataProperties.swift */; };
 		7A4C22141C802B1000CB1AE7 /* Joke.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A4C22101C802B1000CB1AE7 /* Joke.swift */; };
+		7A4C22171C805DB500CB1AE7 /* JokesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A4C22161C805DB500CB1AE7 /* JokesViewController.swift */; };
+		7A4C22191C81C7C500CB1AE7 /* JokeTextViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A4C22181C81C7C500CB1AE7 /* JokeTextViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +34,8 @@
 		7A4C220E1C802B1000CB1AE7 /* Collection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Collection.swift; path = ../Collection.swift; sourceTree = "<group>"; };
 		7A4C220F1C802B1000CB1AE7 /* Joke+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Joke+CoreDataProperties.swift"; path = "../Joke+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		7A4C22101C802B1000CB1AE7 /* Joke.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Joke.swift; path = ../Joke.swift; sourceTree = "<group>"; };
+		7A4C22161C805DB500CB1AE7 /* JokesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JokesViewController.swift; sourceTree = "<group>"; };
+		7A4C22181C81C7C500CB1AE7 /* JokeTextViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JokeTextViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,6 +70,8 @@
 			children = (
 				7A4C21F81C80235F00CB1AE7 /* AppDelegate.swift */,
 				7A4C21FA1C80235F00CB1AE7 /* ViewController.swift */,
+				7A4C22161C805DB500CB1AE7 /* JokesViewController.swift */,
+				7A4C22181C81C7C500CB1AE7 /* JokeTextViewController.swift */,
 				7A4C22151C802B3900CB1AE7 /* Models */,
 				7A4C21FC1C80235F00CB1AE7 /* Main.storyboard */,
 				7A4C22021C80235F00CB1AE7 /* Assets.xcassets */,
@@ -161,11 +167,13 @@
 			files = (
 				7A4C22131C802B1000CB1AE7 /* Joke+CoreDataProperties.swift in Sources */,
 				7A4C21FB1C80235F00CB1AE7 /* ViewController.swift in Sources */,
+				7A4C22191C81C7C500CB1AE7 /* JokeTextViewController.swift in Sources */,
 				7A4C22121C802B1000CB1AE7 /* Collection.swift in Sources */,
 				7A4C22111C802B1000CB1AE7 /* Collection+CoreDataProperties.swift in Sources */,
 				7A4C22011C80235F00CB1AE7 /* Joke_Bank.xcdatamodeld in Sources */,
 				7A4C21F91C80235F00CB1AE7 /* AppDelegate.swift in Sources */,
 				7A4C22141C802B1000CB1AE7 /* Joke.swift in Sources */,
+				7A4C22171C805DB500CB1AE7 /* JokesViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
