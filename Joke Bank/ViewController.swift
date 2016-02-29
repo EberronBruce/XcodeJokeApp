@@ -10,8 +10,8 @@ import UIKit
 import CoreData
 import StoreKit
 
-class ViewController: UIViewController, SKProductsRequestDelegate,  UITableViewDataSource, UITableViewDelegate {
-
+class ViewController: UIViewController, SKProductsRequestDelegate,  UITableViewDataSource, UITableViewDelegate, SKPaymentTransactionObserver {
+    
     
     //connect the stoyboard table view
     @IBOutlet weak var tableView: UITableView!
@@ -21,19 +21,37 @@ class ViewController: UIViewController, SKProductsRequestDelegate,  UITableViewD
     
     //Setting up an empty array of products
     var products = [SKProduct]()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
         self.tableView.delegate = self
         self.tableView.dataSource = self
+        
+        //getting the context
+        let context = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
+        //doing a fetch request of the collections entity
+        let collectionRequest = NSFetchRequest(entityName: "Collection")
+        do{
+            try self.collections = context.executeFetchRequest(collectionRequest) as! [Collection]
+            self.tableView.reloadData()
+            
+            if self.collections.count <= 0 {
+                fillJokeBank()
+            }
+            
+        } catch {
+            
+        }
 
         
-        //fillJokeBank()
+        
+        
         grabCollections()
         prepareForPurchase()
-
+        SKPaymentQueue.defaultQueue().addTransactionObserver(self)
+        
     }
     
     //Checking itunes connect for the in app purchases
@@ -51,6 +69,42 @@ class ViewController: UIViewController, SKProductsRequestDelegate,  UITableViewD
         self.tableView.reloadData()
     }
     
+    //To see if payment went through
+    func paymentQueue(queue: SKPaymentQueue, updatedTransactions transactions: [SKPaymentTransaction]) {
+        for transaction in transactions {
+            switch transaction.transactionState {
+            case .Purchased:
+                print("Purchased")
+                giveRewardForProduct(transaction.payment.productIdentifier)
+                SKPaymentQueue.defaultQueue().finishTransaction(transaction)
+                break
+            case .Failed:
+                print("Failed")
+                break
+            case .Restored:
+                print("Restored")
+                break
+            case .Purchasing:
+                print("Purchasing")
+                break
+            case .Deferred:
+                print("Deferred")
+                break
+            }
+        }
+    }
+    
+    //Give the reward for the purchase
+    func giveRewardForProduct(productID: String){
+        for collection in self.collections {
+            if productID == collection.inAppPurchaseID {
+                collection.purchased = true
+                self.tableView.reloadData()
+            }
+        }
+    }
+    
+    
     //Sets up the number of rows in the table view
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.collections.count
@@ -64,20 +118,24 @@ class ViewController: UIViewController, SKProductsRequestDelegate,  UITableViewD
         if (collection.inAppPurchaseID?.isEmpty == nil){
             cell.textLabel!.text = collection.title
         } else {
-            var currentProduct : SKProduct?
-            for product in self.products {
-                if product.productIdentifier == collection.inAppPurchaseID {
-                    currentProduct = product
-                }
-            }
-            if currentProduct != nil {
-                let formatter = NSNumberFormatter()
-                formatter.numberStyle = .CurrencyStyle
-                formatter.locale = currentProduct?.priceLocale
-                let priceString = formatter.stringFromNumber((currentProduct?.price)!)
-                cell.textLabel!.text = "LOCKED * \(collection.title!) * \(priceString!)"
+            if collection.purchased!.boolValue {
+                cell.textLabel!.text = collection.title
             } else {
-                cell.textLabel!.text = "LOCKED * \(collection.title!)"
+                var currentProduct : SKProduct?
+                for product in self.products {
+                    if product.productIdentifier == collection.inAppPurchaseID {
+                        currentProduct = product
+                    }
+                }
+                if currentProduct != nil {
+                    let formatter = NSNumberFormatter()
+                    formatter.numberStyle = .CurrencyStyle
+                    formatter.locale = currentProduct?.priceLocale
+                    let priceString = formatter.stringFromNumber((currentProduct?.price)!)
+                    cell.textLabel!.text = "LOCKED * \(collection.title!) * \(priceString!)"
+                } else {
+                    cell.textLabel!.text = "LOCKED * \(collection.title!)"
+                }
             }
         }
         
@@ -86,8 +144,21 @@ class ViewController: UIViewController, SKProductsRequestDelegate,  UITableViewD
     //When the cell is selected
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let collection = self.collections[indexPath.row]
-        self.performSegueWithIdentifier("CollectionToJokeSegue", sender: collection)
+        if collection.purchased!.boolValue {
+            self.performSegueWithIdentifier("CollectionToJokeSegue", sender: collection)
+        } else {
+            var currentProduct : SKProduct?
+            for product in self.products {
+                if product.productIdentifier == collection.inAppPurchaseID {
+                    currentProduct = product
+                }
+            }
+            let payment = SKPayment(product: currentProduct!)
+            SKPaymentQueue.defaultQueue().addPayment(payment)
+        }
     }
+    
+    
     //Just before the transition to the next view controller
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         let jokesVC = segue.destinationViewController as! JokesViewController
@@ -112,6 +183,11 @@ class ViewController: UIViewController, SKProductsRequestDelegate,  UITableViewD
     
     //Function used to fill in the joke bank and set up core data
     func fillJokeBank(){
+        
+        
+        
+        
+        
         //Addes a context to manage core data
         let context = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
         //Set up the collection and joke entities for core data
@@ -158,7 +234,7 @@ class ViewController: UIViewController, SKProductsRequestDelegate,  UITableViewD
         scienceJoke.title = "Science Lame"
         scienceJoke.text = "This is a lame science joke"
         scienceJoke.collection = science
-
+        
         
         do{
             try context.save()
@@ -166,8 +242,8 @@ class ViewController: UIViewController, SKProductsRequestDelegate,  UITableViewD
             
         }
     }
-
-
-
+    
+    
+    
 }
 
