@@ -21,11 +21,6 @@ class ViewController: UIViewController, SKProductsRequestDelegate,  UITableViewD
     
     //Setting up an empty array of products
     var products = [SKProduct]()
-    
-    /*
-        PROBLEM LIES HERE
-        TABLE VIEW CELLS ARE GETTING POPULATED BEFORE THE PRODUCTS GET SET
-    */
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,15 +36,6 @@ class ViewController: UIViewController, SKProductsRequestDelegate,  UITableViewD
 
     }
     
-    /*
-        Leave the load page and come back using this, the text is displayed. 
-    */
-    override func viewWillAppear(animated: Bool) {
-        grabCollections()
-        prepareForPurchase()
-    }
-
-    
     //Checking itunes connect for the in app purchases
     func prepareForPurchase(){
         let productSet : Set<String> = ["com.redravencomputing.jokes.science", "com.redravencomputing.jokes.sports"]
@@ -59,10 +45,10 @@ class ViewController: UIViewController, SKProductsRequestDelegate,  UITableViewD
     }
     //Response for the SKProductRequest Delegate
     func productsRequest(request: SKProductsRequest, didReceiveResponse response: SKProductsResponse) {
-        //print("products: \(response.products.count)")
-        //print("invalid: \(response.invalidProductIdentifiers.count)")
+        print("products: \(response.products.count)")
+        print("invalid: \(response.invalidProductIdentifiers.count)")
         self.products = response.products
-        //print("in Request \(self.products)")
+        self.tableView.reloadData()
     }
     
     //Sets up the number of rows in the table view
@@ -78,24 +64,22 @@ class ViewController: UIViewController, SKProductsRequestDelegate,  UITableViewD
         if (collection.inAppPurchaseID?.isEmpty == nil){
             cell.textLabel!.text = collection.title
         } else {
-            /*
-                PROBLEM LIES HERE!!
-            */
             var currentProduct : SKProduct?
-            print("In cell \(self.products)")
             for product in self.products {
-                print(product)
                 if product.productIdentifier == collection.inAppPurchaseID {
                     currentProduct = product
                 }
             }
             if currentProduct != nil {
-                print("In current")
-                cell.textLabel!.text = "LOCKED * \(collection.title!) * \(currentProduct!.price)"
+                let formatter = NSNumberFormatter()
+                formatter.numberStyle = .CurrencyStyle
+                formatter.locale = currentProduct?.priceLocale
+                let priceString = formatter.stringFromNumber((currentProduct?.price)!)
+                cell.textLabel!.text = "LOCKED * \(collection.title!) * \(priceString!)"
+            } else {
+                cell.textLabel!.text = "LOCKED * \(collection.title!)"
             }
         }
-        
-        
         
         return cell
     }
