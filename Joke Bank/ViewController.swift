@@ -32,8 +32,8 @@ class ViewController: UIViewController, SKProductsRequestDelegate,  UITableViewD
 
         
         //fillJokeBank()
-        //grabCollections()
-        //prepareForPurchase()
+        grabCollections()
+        prepareForPurchase()
 
     }
     
