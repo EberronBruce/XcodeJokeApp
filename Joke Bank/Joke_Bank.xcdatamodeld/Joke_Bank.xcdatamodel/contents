@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="9525" systemVersion="15D21" minimumToolsVersion="Automatic">
     <entity name="Collection" representedClassName=".Collection" syncable="YES">
+        <attribute name="inAppPurchaseID" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="purchased" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="jokes" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Joke" inverseName="collection" inverseEntity="Joke" syncable="YES"/>
@@ -11,7 +12,7 @@
         <relationship name="collection" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Collection" inverseName="jokes" inverseEntity="Collection" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Collection" positionX="-63" positionY="-18" width="128" height="90"/>
+        <element name="Collection" positionX="-63" positionY="-18" width="128" height="105"/>
         <element name="Joke" positionX="-54" positionY="9" width="128" height="90"/>
     </elements>
 </model>

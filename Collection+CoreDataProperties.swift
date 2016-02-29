@@ -2,7 +2,7 @@
 //  Collection+CoreDataProperties.swift
 //  Joke Bank
 //
-//  Created by Bruce Burgess on 2/26/16.
+//  Created by Bruce Burgess on 2/29/16.
 //  Copyright © 2016 Bruce Burgess. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
@@ -14,8 +14,9 @@ import CoreData
 
 extension Collection {
 
-    @NSManaged var title: String?
     @NSManaged var purchased: NSNumber?
+    @NSManaged var title: String?
+    @NSManaged var inAppPurchaseID: String?
     @NSManaged var jokes: NSSet?
 
 }

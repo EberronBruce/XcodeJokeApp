@@ -7,13 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7A30A44A1C84001400D69266 /* Collection+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A30A4491C84001400D69266 /* Collection+CoreDataProperties.swift */; };
 		7A4C21F91C80235F00CB1AE7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A4C21F81C80235F00CB1AE7 /* AppDelegate.swift */; };
 		7A4C21FB1C80235F00CB1AE7 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A4C21FA1C80235F00CB1AE7 /* ViewController.swift */; };
 		7A4C21FE1C80235F00CB1AE7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7A4C21FC1C80235F00CB1AE7 /* Main.storyboard */; };
 		7A4C22011C80235F00CB1AE7 /* Joke_Bank.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7A4C21FF1C80235F00CB1AE7 /* Joke_Bank.xcdatamodeld */; };
 		7A4C22031C80235F00CB1AE7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7A4C22021C80235F00CB1AE7 /* Assets.xcassets */; };
 		7A4C22061C80235F00CB1AE7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7A4C22041C80235F00CB1AE7 /* LaunchScreen.storyboard */; };
-		7A4C22111C802B1000CB1AE7 /* Collection+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A4C220D1C802B1000CB1AE7 /* Collection+CoreDataProperties.swift */; };
 		7A4C22121C802B1000CB1AE7 /* Collection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A4C220E1C802B1000CB1AE7 /* Collection.swift */; };
 		7A4C22131C802B1000CB1AE7 /* Joke+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A4C220F1C802B1000CB1AE7 /* Joke+CoreDataProperties.swift */; };
 		7A4C22141C802B1000CB1AE7 /* Joke.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A4C22101C802B1000CB1AE7 /* Joke.swift */; };
@@ -22,6 +22,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7A30A4491C84001400D69266 /* Collection+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Collection+CoreDataProperties.swift"; path = "../Collection+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		7A4C21F51C80235F00CB1AE7 /* Joke Bank.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Joke Bank.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7A4C21F81C80235F00CB1AE7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7A4C21FA1C80235F00CB1AE7 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -30,7 +31,6 @@
 		7A4C22021C80235F00CB1AE7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7A4C22051C80235F00CB1AE7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7A4C22071C80235F00CB1AE7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		7A4C220D1C802B1000CB1AE7 /* Collection+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Collection+CoreDataProperties.swift"; path = "../Collection+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		7A4C220E1C802B1000CB1AE7 /* Collection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Collection.swift; path = ../Collection.swift; sourceTree = "<group>"; };
 		7A4C220F1C802B1000CB1AE7 /* Joke+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Joke+CoreDataProperties.swift"; path = "../Joke+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		7A4C22101C802B1000CB1AE7 /* Joke.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Joke.swift; path = ../Joke.swift; sourceTree = "<group>"; };
@@ -85,7 +85,7 @@
 		7A4C22151C802B3900CB1AE7 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				7A4C220D1C802B1000CB1AE7 /* Collection+CoreDataProperties.swift */,
+				7A30A4491C84001400D69266 /* Collection+CoreDataProperties.swift */,
 				7A4C220E1C802B1000CB1AE7 /* Collection.swift */,
 				7A4C220F1C802B1000CB1AE7 /* Joke+CoreDataProperties.swift */,
 				7A4C22101C802B1000CB1AE7 /* Joke.swift */,
@@ -169,11 +169,11 @@
 				7A4C21FB1C80235F00CB1AE7 /* ViewController.swift in Sources */,
 				7A4C22191C81C7C500CB1AE7 /* JokeTextViewController.swift in Sources */,
 				7A4C22121C802B1000CB1AE7 /* Collection.swift in Sources */,
-				7A4C22111C802B1000CB1AE7 /* Collection+CoreDataProperties.swift in Sources */,
 				7A4C22011C80235F00CB1AE7 /* Joke_Bank.xcdatamodeld in Sources */,
 				7A4C21F91C80235F00CB1AE7 /* AppDelegate.swift in Sources */,
 				7A4C22141C802B1000CB1AE7 /* Joke.swift in Sources */,
 				7A4C22171C805DB500CB1AE7 /* JokesViewController.swift in Sources */,
+				7A30A44A1C84001400D69266 /* Collection+CoreDataProperties.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -323,6 +323,7 @@
 				7A4C220C1C80235F00CB1AE7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 

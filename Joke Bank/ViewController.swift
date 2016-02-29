@@ -8,24 +8,54 @@
 
 import UIKit
 import CoreData
+import StoreKit
 
-class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class ViewController: UIViewController, SKProductsRequestDelegate,  UITableViewDataSource, UITableViewDelegate {
 
+    
     //connect the stoyboard table view
     @IBOutlet weak var tableView: UITableView!
     
     //Set up a property
     var collections = [Collection]()
     
+    //Setting up an empty array of products
+    var products = [SKProduct]()
+    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
         self.tableView.delegate = self
         self.tableView.dataSource = self
+
         
         //fillJokeBank()
+        //grabCollections()
+        //prepareForPurchase()
+
+    }
+    
+    override func viewWillAppear(animated: Bool) {
         grabCollections()
+        prepareForPurchase()
+    }
+
+    
+    //Checking itunes connect for the in app purchases
+    func prepareForPurchase(){
+        let productSet : Set<String> = ["com.redravencomputing.jokes.science", "com.redravencomputing.jokes.sports"]
+        let request = SKProductsRequest(productIdentifiers: productSet)
+        request.delegate = self
+        request.start()
+    }
+    //Response for the SKProductRequest Delegate
+    func productsRequest(request: SKProductsRequest, didReceiveResponse response: SKProductsResponse) {
+        //print("products: \(response.products.count)")
+        //print("invalid: \(response.invalidProductIdentifiers.count)")
+        self.products = response.products
+        //print("in Request \(self.products)")
     }
     
     //Sets up the number of rows in the table view
@@ -37,7 +67,26 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = UITableViewCell()
         let collection = self.collections[indexPath.row]
-        cell.textLabel!.text = collection.title
+        
+        if (collection.inAppPurchaseID?.isEmpty == nil){
+            cell.textLabel!.text = collection.title
+        } else {
+            var currentProduct : SKProduct?
+            print("In cell \(self.products)")
+            for product in self.products {
+                print(product)
+                if product.productIdentifier == collection.inAppPurchaseID {
+                    currentProduct = product
+                }
+            }
+            if currentProduct != nil {
+                print("In current")
+                cell.textLabel!.text = "LOCKED * \(collection.title!) * \(currentProduct!.price)"
+            }
+        }
+        
+        
+        
         return cell
     }
     //When the cell is selected
@@ -74,11 +123,28 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         //Set up the collection and joke entities for core data
         let collectionDescription = NSEntityDescription.entityForName("Collection", inManagedObjectContext: context)
         let jokeDescription = NSEntityDescription.entityForName("Joke", inManagedObjectContext: context)
-        //Set up Yo Mamma jokes
+        
+        //Collections
         let yoMamma = Collection(entity: collectionDescription!, insertIntoManagedObjectContext: context)
-        yoMamma.title = "Random Jokes"
+        yoMamma.title = "Yo Mamma Jokes"
         yoMamma.purchased = true
         
+        let animal = Collection(entity: collectionDescription!, insertIntoManagedObjectContext: context)
+        animal.title = "Animal Jokes"
+        animal.purchased = true
+        
+        let sports = Collection(entity: collectionDescription!, insertIntoManagedObjectContext: context)
+        sports.title = "Sports Jokes"
+        sports.inAppPurchaseID = "com.redravencomputing.jokes.sports"
+        sports.purchased = false
+        
+        let science = Collection(entity: collectionDescription!, insertIntoManagedObjectContext: context)
+        science.title = "Science Jokes"
+        science.inAppPurchaseID = "com.redravencomputing.jokes.science"
+        science.purchased = false
+        
+        
+        //Jokes
         let taxiJoke = Joke(entity: jokeDescription!, insertIntoManagedObjectContext: context)
         taxiJoke.title = "Taxi"
         taxiJoke.text = "Yo Mamma so fat that when she wears a yellow dress people chase after her and yell \"TAXI\""
@@ -87,7 +153,17 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         let lameJoke = Joke(entity: jokeDescription!, insertIntoManagedObjectContext: context)
         lameJoke.title = "Lame"
         lameJoke.text = "This is a lame joke"
-        lameJoke.collection = yoMamma
+        lameJoke.collection = animal
+        
+        let sportsJoke = Joke(entity: jokeDescription!, insertIntoManagedObjectContext: context)
+        sportsJoke.title = "Sports Lame"
+        sportsJoke.text = "This is a lame sports joke"
+        sportsJoke.collection = sports
+        
+        let scienceJoke = Joke(entity: jokeDescription!, insertIntoManagedObjectContext: context)
+        scienceJoke.title = "Science Lame"
+        scienceJoke.text = "This is a lame science joke"
+        scienceJoke.collection = science
 
         
         do{
