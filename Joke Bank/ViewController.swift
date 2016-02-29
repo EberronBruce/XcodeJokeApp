@@ -22,6 +22,10 @@ class ViewController: UIViewController, SKProductsRequestDelegate,  UITableViewD
     //Setting up an empty array of products
     var products = [SKProduct]()
     
+    /*
+        PROBLEM LIES HERE
+        TABLE VIEW CELLS ARE GETTING POPULATED BEFORE THE PRODUCTS GET SET
+    */
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,6 +41,9 @@ class ViewController: UIViewController, SKProductsRequestDelegate,  UITableViewD
 
     }
     
+    /*
+        Leave the load page and come back using this, the text is displayed. 
+    */
     override func viewWillAppear(animated: Bool) {
         grabCollections()
         prepareForPurchase()
@@ -71,6 +78,9 @@ class ViewController: UIViewController, SKProductsRequestDelegate,  UITableViewD
         if (collection.inAppPurchaseID?.isEmpty == nil){
             cell.textLabel!.text = collection.title
         } else {
+            /*
+                PROBLEM LIES HERE!!
+            */
             var currentProduct : SKProduct?
             print("In cell \(self.products)")
             for product in self.products {
